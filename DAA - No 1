@@ -1,0 +1,66 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    cout <<"Masukkan Jumlah Matrix: ";
+    cin >> n;
+
+    int m[n][n] = {0};
+    int s[n][n] = {0};
+    int j, min,q;
+
+    int p[n+1];
+    for(int i = 0; i<n; i++){
+        cin >> p[i];
+    }
+        for(int d = 1; d < n-1; d++){
+            for(int i =1; i< n-d; i++){
+                j = i+d;
+                min = INT_MAX;
+                for(int k =i;k <=j-1;k++){
+                    q = m[i][k] + m[k+1][j] + p[i-1]*p[k]*p[j];// rumus untuk menghitung matrix
+                    if(q<min)
+                    {
+                        min = q;
+                        s[i][j] = k;
+                    }
+                }
+                m[i][j] = min;
+            }
+            
+        }
+
+
+    // Output hasil optimal
+    cout<< "Angka Optimal : " <<m[1][n-1] <<endl;
+
+    //Menampilkan Matrix M
+	cout << "Matriks M:" << endl;
+	for (int i = 1; i < n; i++)
+	{
+		cout << endl;
+		cout << "|";
+		for (int j = 1; j < n; j++)
+		{
+			cout << m[i][j] << "\t|";
+		}
+		cout << endl;
+	}
+	cout << endl << endl;
+	
+	//Menampilkan Matrix S
+	cout << "Matriks S:" << endl;
+	for (int i = 1; i < n; i++)
+	{
+		cout << endl;
+		cout << "|";
+		for (int j = 1; j < n; j++)
+		{
+			cout << s[i][j] << "\t|";
+		}
+		cout << endl;
+	}
+	cout << endl << endl;
+}
